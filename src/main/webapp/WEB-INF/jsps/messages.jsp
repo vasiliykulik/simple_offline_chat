@@ -5,7 +5,7 @@
 <table>
     <c:forEach var="msg" items="${msgs}">
         <tr>
-            <td><b>${msg.user}</b> : <c:out value="${msg.text}"/></td>
+            <td><b>${msg.user.name}</b> : <c:out value="${msg.text}"/></td>
         </tr>
     </c:forEach>
 </table>

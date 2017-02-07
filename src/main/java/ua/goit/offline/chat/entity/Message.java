@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Table(name = "messages", schema = "chat")
 public class Message {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String text;
     @ManyToOne (fetch = FetchType.EAGER)

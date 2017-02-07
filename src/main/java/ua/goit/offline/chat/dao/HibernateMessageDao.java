@@ -25,15 +25,6 @@ public class HibernateMessageDao implements MessagesDao {
 
     public void save(Message message) {
         Session session = sessionFactory.getCurrentSession();
-        Transaction transaction = session.beginTransaction();
-        try {
-            session.save(message);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-        }
-
+        session.save(message);
     }
 }

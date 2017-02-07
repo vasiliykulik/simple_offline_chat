@@ -14,6 +14,6 @@ public class HibernateUsersDao implements UsersDao {
     }
 
     public User getUser(String username) {
-        return sessionFactory.getCurrentSession().createQuery("from User where username=:username", User.class).setParameter("username", username).uniqueResult();
+        return sessionFactory.getCurrentSession().createQuery("from User where name=:username", User.class).setParameter("username", username).uniqueResult();
     }
 }

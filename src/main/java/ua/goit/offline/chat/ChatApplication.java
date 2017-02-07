@@ -2,6 +2,7 @@ package ua.goit.offline.chat;
 
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.support.XmlWebApplicationContext;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
 
 import javax.servlet.ServletContext;
@@ -20,8 +21,8 @@ public class ChatApplication implements WebApplicationInitializer {
         reg.setLoadOnStartup(1);
         reg.addMapping("/");
 
-        /*DelegatingFilterProxy filter = new DelegatingFilterProxy("springSecurityFilterChain");
+        DelegatingFilterProxy filter = new DelegatingFilterProxy("springSecurityFilterChain");
         filter.setContextAttribute("org.springframework.web.servlet.FrameworkServlet.CONTEXT.dispatcher");
-        servletContext.addFilter("springSecurityFilterChain", filter).addMappingForUrlPatterns(null, false, "/*");*/
+        servletContext.addFilter("springSecurityFilterChain", filter).addMappingForUrlPatterns(null, false, "/*");
     }
 }
