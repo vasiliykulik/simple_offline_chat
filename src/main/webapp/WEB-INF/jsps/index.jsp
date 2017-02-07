@@ -1,0 +1,55 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<head>
+    <title>Chat - Customer Module</title>
+    <link href="<c:url value="/resources/style.css" />" rel="stylesheet" type="text/css"/>
+</head>
+<div id="wrapper">
+    <div id="menu">
+        <p class="welcome">Welcome, <b></b></p>
+        <p class="logout"><a id="exit" href="#">Exit Chat</a></p>
+        <div style="clear:both"></div>
+    </div>
+
+    <div id="chatbox"></div>
+
+    <form name="message" action="">
+        <input name="usermsg" type="text" id="usermsg" size="63"/>
+        <input name="submitmsg" type="submit" id="submitmsg" value="Send"/>
+    </form>
+</div>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //If user wants to end session
+        $("#exit").click(function () {
+            var exit = confirm("Are you sure you want to end the session?");
+            if (exit == true) {
+                window.location = 'login?logout=true';
+            }
+        });
+        //If user submits the form
+        $("#submitmsg").click(function () {
+            var msg = $("#usermsg");
+            var clientmsg = msg.val();
+            $.post("/post-messages", {text: clientmsg});
+            msg.attr("value", "");
+            return false;
+        });
+        //Load the file containing the chat log
+        function loadLog() {
+
+            $.ajax({
+                url: "/get-messages",
+                cache: false,
+                success: function (html) {
+                    $("#chatbox").html(html); //Insert chat log into the #chatbox div
+                },
+            });
+        }
+
+        setInterval(loadLog, 2500);
+    });
+</script>
+</body>
+</html>
