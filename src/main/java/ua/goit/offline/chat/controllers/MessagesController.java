@@ -34,10 +34,10 @@ public class MessagesController {
     @PostMapping("create")
     public void addMessage(Authentication authentication, String text) {
         try {
-            UserEntity entity = (UserEntity) authentication.getPrincipal();
+            User user = (User) authentication.getPrincipal();
             Message message = new Message();
             message.setText(text);
-            message.setUser(entity.getUser());
+            message.setUser(user);
             messagesService.save(message);
         } catch (Exception e) {
             e.printStackTrace();
