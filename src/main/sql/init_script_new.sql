@@ -1,25 +1,18 @@
--- Database: chat
-CREATE DATABASE chat
-    WITH
-    OWNER = postgres
-    ENCODING = 'UTF8'
-    TABLESPACE = pg_default
-    CONNECTION LIMIT = -1;
 
 CREATE SCHEMA chat;
 
 CREATE TABLE chat.users
 (
-    id integer NOT NULL DEFAULT nextval('chat.users_id_seq'::regclass),
-    name character varying(100) COLLATE pg_catalog."default",
-    password character varying(200) COLLATE pg_catalog."default",
+    id SERIAL,
+    name character varying(100),
+    password character varying(200),
     CONSTRAINT users_pkey PRIMARY KEY (id)
 );
 
 CREATE TABLE chat.messages
 (
-    id integer NOT NULL DEFAULT nextval('chat.messages_id_seq'::regclass),
-    text character varying(500) COLLATE pg_catalog."default",
+    id SERIAL,
+    text character varying(500),
     create_time timestamp with time zone,
     user_id bigint,
     CONSTRAINT messages_pkey PRIMARY KEY (id),
@@ -31,14 +24,14 @@ CREATE TABLE chat.messages
 
 CREATE TABLE chat.roles
 (
-    name character varying(100) COLLATE pg_catalog."default" NOT NULL,
+    name character varying(100),
     CONSTRAINT roles_pkey PRIMARY KEY (name)
 );
 
 CREATE TABLE chat.user_roles
 (
     user_id bigint NOT NULL,
-    role_name character varying(100) COLLATE pg_catalog."default" NOT NULL,
+    role_name character varying(100),
     CONSTRAINT user_roles_pkey PRIMARY KEY (role_name, user_id),
     CONSTRAINT "FKR_ROLE_NAME" FOREIGN KEY (role_name)
         REFERENCES chat.roles (name) MATCH SIMPLE
@@ -49,3 +42,10 @@ CREATE TABLE chat.user_roles
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
 );
+
+
+insert into chat.users(name, password) values ('test-user', '0bfdcaa92b7396c93f6feba7eeb3f2b5');
+insert into chat.roles(name) values ('WRITER');
+insert into chat.roles(name) values ('READER')
+insert into chat.users(name, password) values ('test-user1', '0bfdcaa92b7396c93f6feba7eeb3f2b5');-- test-user   test
+insert into chat.user_roles(user_id, role_name) VALUES (1,'WRITER');
