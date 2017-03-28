@@ -46,6 +46,6 @@ CREATE TABLE chat.user_roles
 
 insert into chat.users(name, password) values ('test-user', '0bfdcaa92b7396c93f6feba7eeb3f2b5');
 insert into chat.roles(name) values ('WRITER');
-insert into chat.roles(name) values ('READER')
+insert into chat.roles(name) values ('READER');
 insert into chat.users(name, password) values ('test-user1', '0bfdcaa92b7396c93f6feba7eeb3f2b5');-- test-user   test
 insert into chat.user_roles(user_id, role_name) VALUES (1,'WRITER');
