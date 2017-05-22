@@ -18,6 +18,7 @@
     <context:component-scan base-package="ua.goit.offline.chat.configurations"/>
     <context:component-scan base-package="ua.goit.offline.chat.controllers"/>
     <context:component-scan base-package="ua.goit.offline.chat.validation"/>
+    <context:component-scan base-package="ua.goit.offline.chat.myvalidation"/>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
